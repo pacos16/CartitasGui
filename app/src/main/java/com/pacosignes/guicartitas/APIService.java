@@ -24,6 +24,10 @@ public interface APIService {
     Call<List<Carta>> getCarta();
 
     //Jugadores
+
+    @GET("/ApiRESTFul/rest/jugadores/{correo}")
+    Call<ResponseBody> getJugador(@Path("correo") String correo);
+
     @POST("/ApiRESTFul/rest/jugadores")
     Call<ResponseBody> saveJugador(@Body RequestBody params);
 
