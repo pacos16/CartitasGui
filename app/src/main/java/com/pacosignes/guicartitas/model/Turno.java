@@ -3,7 +3,7 @@ package com.pacosignes.guicartitas.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Turno {
+public class Turno  {
 
 	@SerializedName("partida")
 	@Expose

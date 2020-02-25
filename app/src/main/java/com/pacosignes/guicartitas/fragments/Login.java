@@ -91,8 +91,9 @@ public class Login extends Fragment {
 
 
     private void goToGame(){
-        Intent intent=new Intent();
-        intent.putExtra("Jugador",new Gson().toJson(j));
+        MenuInicio m=new MenuInicio(etEmail.getText().toString());
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.flMainFrame,m).commit();
 
     }
 

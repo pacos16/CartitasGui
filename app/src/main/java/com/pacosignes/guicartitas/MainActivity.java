@@ -8,6 +8,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.pacosignes.guicartitas.fragments.Login;
 import com.pacosignes.guicartitas.model.Caracteristicas;
 import com.pacosignes.guicartitas.model.Carta;
@@ -17,6 +19,7 @@ import com.pacosignes.guicartitas.model.Turno;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -28,16 +31,14 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Login login=new Login();
+
+
         getSupportFragmentManager().beginTransaction().replace(R.id.flMainFrame,login).commit();
-
-
-
 
     }
 }

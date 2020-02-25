@@ -23,7 +23,7 @@ public class Carta {
 	@SerializedName("potencia")
 	@Expose
 	private String potencia;
-	@SerializedName("revoluciones")
+	@SerializedName("revolucinoes")
 	@Expose
 	private int revolucinoes;
 	@SerializedName("velocidad")
@@ -31,7 +31,7 @@ public class Carta {
 	private int velocidad;
 	@SerializedName("consumo")
 	@Expose
-	private float consumo;
+	private double consumo;
 
 	
 	public Carta() {
@@ -39,7 +39,7 @@ public class Carta {
 	}
 	
 	public Carta(int id, String marca, String modelo, int motor, int cilindros, String potencia, int revolucinoes,
-			int velocidad, float consumo) {
+			int velocidad, double consumo) {
 		super();
 		this.id=id;
 		this.marca = marca;
@@ -102,10 +102,10 @@ public class Carta {
 	public void setVelocidad(int velocidad) {
 		this.velocidad = velocidad;
 	}
-	public float getConsumo() {
+	public double getConsumo() {
 		return consumo;
 	}
-	public void setConsumo(float consumo) {
+	public void setConsumo(double consumo) {
 		this.consumo = consumo;
 	}
 

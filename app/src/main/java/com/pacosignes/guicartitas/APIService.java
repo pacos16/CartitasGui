@@ -21,7 +21,7 @@ public interface APIService {
 
     //Cartas
     @GET("/ApiRESTFul/rest/cartas")
-    Call<List<Carta>> getCarta();
+    Call<ResponseBody> getCartas();
 
     //Jugadores
 
@@ -41,5 +41,9 @@ public interface APIService {
     @POST("/ApiRESTFul/rest/turnos")
     Call<ResponseBody> saveTurno(@Body RequestBody params);
 
+    //Metodos Juego
+
+    @GET("/ApiRESTFul/rest/metodosJuego/iniciarPartida/{correo}")
+    Call<ResponseBody> getInicioPartida(@Path("correo") String correo);
 
 }
