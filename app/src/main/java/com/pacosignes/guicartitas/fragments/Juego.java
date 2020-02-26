@@ -288,6 +288,8 @@ public class Juego extends Fragment implements ICartaListener {
 
 
             actualizaResultados(turno);
+            if(automatico)
+                bot();
 
         }
 
@@ -361,12 +363,11 @@ public class Juego extends Fragment implements ICartaListener {
         }
         paqueteTurno.setNumTurno(numTurno);
 
-        if(automatico){
-            bot();
-        }else {
-            enviarTurno();
 
-        }
+
+        enviarTurno();
+
+
 
     }
 
