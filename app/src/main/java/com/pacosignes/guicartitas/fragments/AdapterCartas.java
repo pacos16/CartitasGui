@@ -1,5 +1,7 @@
 package com.pacosignes.guicartitas.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pacosignes.guicartitas.ICartaListener;
 import com.pacosignes.guicartitas.R;
 import com.pacosignes.guicartitas.model.Carta;
 
@@ -16,9 +19,13 @@ import java.util.ArrayList;
 
 public class AdapterCartas extends RecyclerView.Adapter<AdapterCartas.CartasViewHolder> {
     private ArrayList<Carta> cartas;
+    private ICartaListener listener;
+    private Activity activity;
 
-    public AdapterCartas(ArrayList<Carta> cartas) {
+    public AdapterCartas(ArrayList<Carta> cartas, ICartaListener listener, Activity activity) {
         this.cartas = cartas;
+        this.listener=listener;
+        this.activity=activity;
     }
 
     @NonNull
@@ -39,7 +46,7 @@ public class AdapterCartas extends RecyclerView.Adapter<AdapterCartas.CartasView
         return cartas.size();
     }
 
-    public class CartasViewHolder extends RecyclerView.ViewHolder{
+    public class CartasViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView ivCocheListItem;
         private TextView tvMarca;
@@ -50,6 +57,7 @@ public class AdapterCartas extends RecyclerView.Adapter<AdapterCartas.CartasView
         private TextView tvRevoluciones;
         private TextView tvVelocidad;
         private TextView tvConsumo;
+
         public CartasViewHolder(@NonNull View itemView) {
             super(itemView);
             ivCocheListItem=itemView.findViewById(R.id.ivCocheListItem);
@@ -61,11 +69,17 @@ public class AdapterCartas extends RecyclerView.Adapter<AdapterCartas.CartasView
             tvRevoluciones=itemView.findViewById(R.id.tvRevoluciones);
             tvVelocidad=itemView.findViewById(R.id.tvVelocidad);
             tvConsumo=itemView.findViewById(R.id.tvConsumo);
+            itemView.setOnClickListener(this);
 
         }
 
         public void bind(int position){
             Carta c=cartas.get(position);
+            int id=itemView.getResources().getIdentifier(
+                    "_"+c.getId(),
+                    "drawable",ivCocheListItem.getContext().getPackageName());
+
+            ivCocheListItem.setImageResource(id);
             tvMarca.setText(c.getMarca());
             tvModelo.setText(c.getModelo());
             tvMotor.setText(String.valueOf(c.getMotor()));
@@ -74,6 +88,11 @@ public class AdapterCartas extends RecyclerView.Adapter<AdapterCartas.CartasView
             tvRevoluciones.setText(String.valueOf(c.getRevolucinoes()));
             tvVelocidad.setText(String.valueOf(c.getVelocidad()));
             tvConsumo.setText(String.valueOf(c.getConsumo()));
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onCartaSeleccionada(cartas.get(getAdapterPosition()));
         }
     }
 

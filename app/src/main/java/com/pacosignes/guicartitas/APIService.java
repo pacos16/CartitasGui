@@ -46,4 +46,10 @@ public interface APIService {
     @GET("/ApiRESTFul/rest/metodosJuego/iniciarPartida/{correo}")
     Call<ResponseBody> getInicioPartida(@Path("correo") String correo);
 
+    @POST("/ApiRESTFul/rest/metodosJuego/jugarTurno")
+    Call<ResponseBody> enviarTurno(@Body RequestBody params);
+
+    @GET("/ApiRESTFul/rest/estadisticas/estadisticasCartas")
+    Call<ResponseBody> getEstadisticasCartas();
+
 }

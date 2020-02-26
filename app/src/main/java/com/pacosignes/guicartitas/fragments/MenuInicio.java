@@ -72,6 +72,9 @@ public class MenuInicio extends Fragment {
                     case R.id.btPartidaBot:
                         break;
                     case R.id.btEstadisticas:
+                    Winrate winrate=new Winrate();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.flMainFrame,winrate).addToBackStack(null).commit();
                         break;
                 }
             }

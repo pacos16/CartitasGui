@@ -14,7 +14,7 @@ public class Turno  {
 	@SerializedName("cartaCpu")
 	@Expose
 	private int cartaCpu;
-	@SerializedName("caracteristicas")
+	@SerializedName("caracteristica")
 	@Expose
 	private int caracteristica;
 	@SerializedName("numTurno")
