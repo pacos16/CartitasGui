@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1002233947220",
+    "firebase_url": "https://guicartas.firebaseio.com",
+    "project_id": "guicartas",
+    "storage_bucket": "guicartas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002233947220:android:5be142dcb809e0cf54b9c1",
+        "android_client_info": {
+          "package_name": "com.pacosignes.guicartas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002233947220-b1o7umgahnih4j46ha06vhgtd406q59p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pacosignes.guicartas",
+            "certificate_hash": "12d4c4613d700b258ef34cd0e9fce1316354e36d"
+          }
+        },
+        {
+          "client_id": "1002233947220-drb3lrt27u9jqloqfv0leaeoj4sjroi8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl5t-TWmaml-N4xRTfaYK4txgot1es4j4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002233947220-drb3lrt27u9jqloqfv0leaeoj4sjroi8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

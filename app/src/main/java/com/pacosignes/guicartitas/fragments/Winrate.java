@@ -32,6 +32,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Esta clase utiliza el endpoint
+ * get estadisticas/estadisticasCartas para obtener los resultados
+ * de todas las cartas en todos los turnos de la partida
+ * una vez llega aqui, se ordena el array por winrate y por victorias, y se construye un recycler view para
+ * visualizarlos en pantalla
+ */
 public class Winrate extends Fragment {
 
     private RecyclerView rvWinrate;

@@ -34,12 +34,6 @@ public interface APIService {
     @PUT("/ApiRESTFul/rest/jugadores/{correo}")
     Call<ResponseBody> modificarJugador(@Path("correo") String correo,@Body RequestBody params);
 
-    @DELETE("/ApiRESTFul/rest/jugadores/{correo}")
-    Call<ResponseBody> borrarJugador(@Path("correo") String correo);
-
-    //Turnos
-    @POST("/ApiRESTFul/rest/turnos")
-    Call<ResponseBody> saveTurno(@Body RequestBody params);
 
     //Metodos Juego
 

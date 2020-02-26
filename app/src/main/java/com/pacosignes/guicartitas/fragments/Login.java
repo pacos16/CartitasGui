@@ -57,6 +57,11 @@ public class Login extends Fragment {
 
     }
 
+
+    /**
+     * Metodo comprobar contraseña, utiliza el endpoint  get jugadores/PathParam(correo) para
+     * acceder al jugador y comprobar su contraseña
+     */
     private void comprobarContrasenya(){
         mAPIService.getJugador(etEmail.getText().toString())
                 .enqueue(new Callback<ResponseBody>() {
@@ -81,7 +86,7 @@ public class Login extends Fragment {
 
                     @Override
                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(getActivity(),"El usuario o la contraseña son incorrectos",
+                        Toast.makeText(getActivity(),"NO se puede conectar a la base de datos",
                                 Toast.LENGTH_SHORT).show();
                     }
                 });

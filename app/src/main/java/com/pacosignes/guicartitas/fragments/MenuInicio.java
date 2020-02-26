@@ -67,9 +67,10 @@ public class MenuInicio extends Fragment {
             public void onClick(View v) {
                 switch (v.getId()){
                     case R.id.btPartidaNormal:
-                        iniciarNormal();
+                        iniciar(false);
                         break;
                     case R.id.btPartidaBot:
+                        iniciar(true);
                         break;
                     case R.id.btEstadisticas:
                     Winrate winrate=new Winrate();
@@ -87,7 +88,7 @@ public class MenuInicio extends Fragment {
     }
 
 
-    private void iniciarNormal(){
+    private void iniciar(final boolean automatico){
         mAPIService.getInicioPartida(idUsuario).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -122,7 +123,7 @@ public class MenuInicio extends Fragment {
                             object.getBoolean("ataque"),
                             object.getInt("resultado")
                     );
-                    Juego juego=new Juego(false,manoJugador,turnoInicial);
+                    Juego juego=new Juego(automatico,manoJugador,turnoInicial);
                     getActivity().getSupportFragmentManager()
                             .beginTransaction().replace(R.id.flMainFrame,juego).commit();
                 } catch (IOException e) {

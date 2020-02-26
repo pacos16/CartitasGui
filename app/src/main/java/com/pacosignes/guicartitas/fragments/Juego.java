@@ -40,6 +40,7 @@ import java.io.IOException;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 import okhttp3.MediaType;
@@ -49,6 +50,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+/**
+ * Clase principal de las mecanicas de juego
+ */
 public class Juego extends Fragment implements ICartaListener {
     //variables de interfaz
 
@@ -149,7 +154,7 @@ public class Juego extends Fragment implements ICartaListener {
     /**
      * Esta funcion llama a la api para obtener las cartas
      * y da comienzo a la partida
-     *
+     * utiliza el endPoint Get cartas
      */
     private void inicializar(){
 
@@ -287,6 +292,13 @@ public class Juego extends Fragment implements ICartaListener {
         }
 
     }
+
+    /**
+     * Esta clase sirve para esperar un tiempo mientras
+     * el usuario ve el resultado del turno anterior y luego
+     * carga el turno siguiente en pantalla
+     *
+     */
     private class WaitAndSet implements Runnable{
 
         private Turno turno;
@@ -314,6 +326,8 @@ public class Juego extends Fragment implements ICartaListener {
         }
     }
 
+
+    //Funcion encargada
     public void generaTurno(){
         if(ataque){
             paqueteTurno=new Turno();
@@ -346,6 +360,84 @@ public class Juego extends Fragment implements ICartaListener {
             paqueteTurno.setCartaJugador(cartaPlayer.getId());
         }
         paqueteTurno.setNumTurno(numTurno);
+
+        if(automatico){
+            bot();
+        }else {
+            enviarTurno();
+
+        }
+
+    }
+
+    private void bot(){
+        Random random= new Random();
+
+        if (paqueteTurno.isAtaque()){
+
+            caracteristicaPlayer= Caracteristicas
+                    .values()[random.nextInt(Caracteristicas.values().length)];
+            paqueteTurno.setCaracteristica(caracteristicaPlayer.ordinal());
+        }
+
+        onCartaSeleccionada(manoJugador.get(random.nextInt(manoJugador.size())));
+
+        Thread thread=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+
+                }catch (InterruptedException ie){
+
+                }
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        enviarTurno();
+
+                    }
+                });
+            }
+        });
+
+        thread.start();
+    }
+
+    private void actualizaResultados(Turno t){
+        if(t.getResultado()==1){
+            puntuacionJugador++;
+            tvResultText.setText("Victoria");
+        }else if(t.getResultado()==2){
+            puntuacionCpu++;
+            tvResultText.setText("Derrota");
+
+        }
+        tvMarcador.setText(puntuacionJugador+"-"+puntuacionCpu);
+
+    }
+
+    /**
+     * Implementación de la interfaz, este metodo es llamado desde el
+     * recycler view y desde el bot
+     * @param c
+     */
+    @Override
+    public void onCartaSeleccionada(Carta c) {
+        cartaPlayer=c;
+        int id=getContext().getResources().getIdentifier(
+                "_"+c.getId(),
+                "drawable",getContext().getPackageName());
+        ivCartaPlayer.setImageResource(id);
+    }
+
+    /**
+     * Esta funcion accede que acabamos de crear y lo manda a la
+     * api.
+     *
+     */
+    public void enviarTurno(){
         String json=new Gson().toJson(paqueteTurno);
         RequestBody body= RequestBody.create(
                 MediaType.parse("application/json; charset=utf-8"),(json));
@@ -378,27 +470,5 @@ public class Juego extends Fragment implements ICartaListener {
 
             }
         });
-    }
-
-    private void actualizaResultados(Turno t){
-        if(t.getResultado()==1){
-            puntuacionJugador++;
-            tvResultText.setText("Victoria");
-        }else if(t.getResultado()==2){
-            puntuacionCpu++;
-            tvResultText.setText("Derrota");
-
-        }
-        tvMarcador.setText(puntuacionJugador+"-"+puntuacionCpu);
-
-    }
-
-    @Override
-    public void onCartaSeleccionada(Carta c) {
-        cartaPlayer=c;
-        int id=getContext().getResources().getIdentifier(
-                "_"+c.getId(),
-                "drawable",getContext().getPackageName());
-        ivCartaPlayer.setImageResource(id);
     }
 }
